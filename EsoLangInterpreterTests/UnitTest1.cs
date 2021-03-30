@@ -1,4 +1,3 @@
-using System;
 using NUnit.Framework;
 
 namespace EsoLangInterpreterTests
@@ -71,6 +70,14 @@ namespace EsoLangInterpreterTests
 			var result = interpreter.Compile("[[]*>*>*>]", "000");
 			Assert.That(result, Is.EqualTo("000"));
 		}
+
+		[Test]
+		public void AnotherFailingTestsInKata()
+		{
+			var interpreter = new SmallFuck();
+			var result = interpreter.Compile("[*>[>*>]>]", "11001");
+			Assert.That(result, Is.EqualTo("01100"));
+		}
 	}
 
 	public class SmallFuck
@@ -101,10 +108,7 @@ namespace EsoLangInterpreterTests
 					break;
 				case '[':
 					if (tapeArray[pointer] == '0')
-					{
-						var lastIndexOf = code.LastIndexOf(']');
-						index+=lastIndexOf;
-					}
+						index = code.LastIndexOf(']');
 					else
 						bracketStartIndex = index;
 					break;
